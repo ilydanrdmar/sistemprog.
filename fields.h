@@ -28,3 +28,44 @@ void sil(IS input, char *silinecek);
 void dur(IS input);
 
 #endif /* _FIELDS_H_ */
+//////////// ya da boyle yazılcak.
+#ifndef _FIELDS_H_
+#define _FIELDS_H_
+
+#include <stdio.h>
+
+// Maksimum satır uzunluğu
+#define MAXLEN 1001
+
+// Giriş yapısının tanımı
+typedef struct inputstruct {
+    char *name;               /* Dosya adı */
+    FILE *f;                  /* Dosya işaretçisi */
+    int line;                 /* Satır numarası */
+    char text1[MAXLEN];       /* Satır */
+    char text2[MAXLEN];       /* Çalışma belleği -- alanları içerir */
+    int NF;                   /* Alan sayısı */
+    char *fields[MAXFIELDS];  /* Alan işaretçileri */
+    int file;                 /* Dosya için 1, popen için 0 */
+} *IS;
+
+// Yeni bir giriş yapısı oluşturur
+extern IS new_input_struct(const char *filename);
+
+// Boru hattı giriş yapısı oluşturur
+extern IS pipe_input_struct(const char *command);
+
+// Satır alır
+extern int get_line(IS);
+
+// Giriş yapısını temizler ve dosyayı kapatır
+extern void jettison_input_struct(IS);
+
+// Maksimum alan sayısı
+#define MAXFIELDS 1000
+
+#endif /* _FIELDS_H_ */
+
+
+
+
